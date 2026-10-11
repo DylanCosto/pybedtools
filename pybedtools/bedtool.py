@@ -3499,7 +3499,7 @@ class BedTool(object):
         if n:
             idxs = list(range(len(self)))
             random.shuffle(idxs)
-            idxs = idxs[:n]
+            idxs = set(idxs[:n])
             with open(tmpfn, "w") as tmp:
                 for i, feature in enumerate(self):
                     if i in idxs:
