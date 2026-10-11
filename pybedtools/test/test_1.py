@@ -630,6 +630,14 @@ def test_subset():
     print(len(s2))
     assert len(s2) == len(a)
 
+    # Keep both the seeded selection and the original input order.
+    for n in (1, 2, len(a), len(a) + 1):
+        random.seed(19)
+        indices = list(range(len(a)))
+        random.shuffle(indices)
+        expected = [str(feature) for i, feature in enumerate(a) if i in indices[:n]]
+        assert [str(feature) for feature in a.random_subset(n=n, seed=19)] == expected
+
 
 def test_eq():
     a = pybedtools.example_bedtool("a.bed")
